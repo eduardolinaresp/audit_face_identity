@@ -1,0 +1,20 @@
+# Ignorar todas las imágenes JPG, PNG y GIF
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.bmp
+
+# Ignorar todo el contenido de estas carpetas
+base_comparacion/*
+fotos/*
+
+# Pero NO ignorar el archivo .gitkeep dentro de ellas
+!base_comparacion/.gitkeep
+!fotos/.gitkeep
+
+# Recordatorio: Ignorar el caché biométrico y logs
+*.pkl
+log_auditoria.txt
+
