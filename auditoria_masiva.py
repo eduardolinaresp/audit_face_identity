@@ -5,7 +5,7 @@ import datetime
 # ==========================================
 # CONFIGURACIÓN DINÁMICA
 # ==========================================
-DIR_AVATARES = "./fotos"                # Carpeta con los N avatares de IA
+DIR_FOTOS = "./fotos"                # Carpeta con fotos
 DIR_FOTOS_REALES = "./base_comparacion" # Tu base de datos de fotos reales
 ARCHIVO_LOG = "log_auditoria.txt"       # Archivo donde se guardará el historial
 MODELO = "Facenet512"                   # 
@@ -21,24 +21,24 @@ def registrar_log(mensaje):
 
 def auditoria_masiva():
     # 1. Validar que las rutas existan
-    if not os.path.exists(DIR_AVATARES) or not os.path.exists(DIR_FOTOS_REALES):
+    if not os.path.exists(DIR_FOTOS) or not os.path.exists(DIR_FOTOS_REALES):
         print("Error: Revisa que las carpetas de avatares y fotos reales existan.")
         return
 
     # 2. Listar archivos válidos (filtramos por extensión)
     extensiones_validas = ('.jpg', '.jpeg', '.png')
-    lista_avatares = [f for f in os.listdir(DIR_AVATARES) if f.lower().endswith(extensiones_validas)]
+    lista_fotos = [f for f in os.listdir(DIR_FOTOS) if f.lower().endswith(extensiones_validas)]
     
-    registrar_log(f"=== INICIANDO AUDITORÍA MASIVA ({len(lista_avatares)} archivos) ===")
+    registrar_log(f"=== INICIANDO AUDITORÍA MASIVA ({len(lista_fotos)} archivos) ===")
 
-    for nombre_archivo in lista_avatares:
-        path_avatar = os.path.join(DIR_AVATARES, nombre_archivo)
+    for nombre_archivo in lista_fotos:
+        path_foto = os.path.join(DIR_FOTOS, nombre_archivo)
         registrar_log(f"🔎 Procesando: {nombre_archivo}")
 
         try:
             #  Ejecución de la comparación N a N
             resultados = DeepFace.find(
-                img_path = path_avatar,
+                img_path = path_foto,
                 db_path = DIR_FOTOS_REALES,
                 model_name = MODELO,
                 detector_backend = DETECTOR,
