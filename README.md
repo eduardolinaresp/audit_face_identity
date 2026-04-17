@@ -57,3 +57,28 @@ Este repositorio está configurado para **no rastrear datos biométricos**. Las 
 * El archivo `.pkl` es un caché generado para acelerar las comparaciones futuras. Si actualizas tu base de fotos reales, bórralo para regenerar los vectores.
 * Se recomienda cerrar aplicaciones pesadas durante la ejecución para optimizar el uso de los 8 GB de RAM por parte de TensorFlow.   
    
+## Diagrama de aplicación 
+```mermaid
+graph TD
+    %% Definición de Estilos
+    classDef highlight fill:#3b82f6,stroke:#3b82f6,color:#fff,font-weight:bold;
+    
+    Start[Dataset: Fotos Reales + Avatares IA] --> Load[Carga Masiva: Python / OpenCV]
+    
+    subgraph "Motor de Auditoría (Deep Learning)"
+        Load --> Pre[Pre-procesamiento: Face Alignment]
+        Pre --> Extract[Extracción de Embeddings: InsightFace]
+        Extract --> Compare{Cálculo de Similitud: Distancia Coseno}
+    end
+
+    subgraph "Capa de Persistencia e Integración"
+        Compare --> DB[(SQLite / CSV Logs)]
+        Compare --> Analytics[Análisis de Falsos Positivos]
+    end
+
+    DB --> Report[Generación de Reporte de Identidad]
+    Report --> Final((Veredicto de Auditoría))
+
+    %% Resaltado de componentes clave
+    class Extract,Compare highlight;
+```    
