@@ -1,7 +1,6 @@
-from deepface import DeepFace
-import os
 import datetime
-
+import warnings
+import os
 # ==========================================
 # CONFIGURACIÓN DINÁMICA
 # ==========================================
@@ -10,6 +9,14 @@ DIR_FOTOS_REALES = "./base_comparacion" # Tu base de datos de fotos reales
 ARCHIVO_LOG = "log_auditoria.txt"       # Archivo donde se guardará el historial
 MODELO = "Facenet512"                   # 
 DETECTOR = "retinaface"                 # 
+# 1. Silencia las advertencias de deprecación de Python
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+warnings.filterwarnings('ignore', module='tensorflow')
+warnings.filterwarnings('ignore', module='keras')
+
+# 2. Silencia los logs internos de TensorFlow (C++)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+from deepface import DeepFace
 
 def registrar_log(mensaje):
     """Escribe los resultados en el archivo y en la consola simultáneamente."""

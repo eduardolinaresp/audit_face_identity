@@ -4,8 +4,8 @@ Este proyecto permite realizar una **auditoría masiva de identidad** comparando
 
 ## 🚀 Características Principales
 
-* [cite_start]**Motor de Inferencia:** Utiliza **Facenet512**, el modelo más preciso para extraer rasgos estructurales[cite: 1, 5].
-* [cite_start]**Detector de Rostros:** Implementa **RetinaFace**, optimizado para detectar caras incluso en imágenes con "ruido" artístico[cite: 1].
+* **Motor de Inferencia:** Utiliza **Facenet512**, el modelo más preciso para extraer rasgos estructurales[cite: 1, 5].
+* **Detector de Rostros:** Implementa **RetinaFace**, optimizado para detectar caras incluso en imágenes con "ruido" artístico[cite: 1].
 * **Procesamiento N a N:** Capacidad de procesar múltiples avatares contra una base de datos local de forma automatizada.
 * **Privacidad Total:** El procesamiento es **100% local**. Las imágenes no se envían a la nube ni a APIs externas.
 * **Registro (Logging):** Generación de un historial detallado (`log_auditoria.txt`) con métricas de distancia y estados de validación.
@@ -27,11 +27,17 @@ Este proyecto permite realizar una **auditoría masiva de identidad** comparando
    ```powershell
    pip install -r requirements.txt   
    ```
-3. **Preparar directorios:**
+3. **Establecer variable de entorno**
+   ```powershell
+   $env:TF_ENABLE_ONEDNN_OPTS=0   
+   ```
+
+## 🖥️ Uso
+
+ **Preparar directorios:**
    * Coloca tus fotos reales en `/base_comparacion`.
    * Coloca tus fotos a auditar en `/fotos`.
 
-## 🖥️ Uso
 
 Para iniciar el proceso de auditoría masiva, ejecuta:
 
